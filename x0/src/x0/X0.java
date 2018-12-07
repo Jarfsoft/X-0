@@ -87,7 +87,10 @@ public class X0 {
                     int f=leer.nextInt();
                     System.out.print("Columna: ");
                     int c=leer.nextInt();
-                    go.marcarJugada(j1, f-1, c-1);
+                    if(!go.marcarJugada(j1, f-1, c-1)){
+                        System.out.println("Elegir otro espacio.");
+                        continue;
+                    }
                     if(go.gane(j1)){
                         FileWriter fw3=new FileWriter(file2,true);
                         System.out.println(nombre+" gano a "+nombre1);
@@ -97,13 +100,32 @@ public class X0 {
                         
                         break;
                     }
-                    System.out.println("\n\n");
-                    go.imprimirTablero();
-                    System.out.print("\nTurno de: "+nombre1+"\nFila: ");
-                    f=leer.nextInt();
-                    System.out.print("Columna: ");
-                    c=leer.nextInt();
-                    go.marcarJugada(j2, f-1, c-1);
+                    int lleno=0;
+                    for(int x=0;x<3;x++){
+                        for(int y=0;y<4;y++){
+                            if(go.getTablero()[x][y]!=' ')
+                                lleno++;
+                        }
+                    }
+                    if(lleno==9){
+                        System.out.println("\n\nEmpate\n");
+                        break;
+                    }
+                    while(true){
+                        System.out.println("\n\n");
+                        go.imprimirTablero();
+                        System.out.print("\nTurno de: "+nombre1+"\nFila: ");
+                        f=leer.nextInt();
+                        System.out.print("Columna: ");
+                        c=leer.nextInt();
+                        if(!go.marcarJugada(j2, f-1, c-1)){
+                            System.out.println("Elegir otro espacio.");
+                            
+                        }else{
+                            break;
+                        }
+                    }
+                    
                     if(go.gane(j2)){
                         FileWriter fw3=new FileWriter(file2,true);
                         fw3.write(nombre1+" gano a "+nombre+"\n");

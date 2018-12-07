@@ -21,6 +21,9 @@ public class JuegoX0 {
             }
         }
     }
+    public char[][] getTablero(){
+        return tablero;
+    }
     public boolean marcarJugada(char jugador, int f, int c){
         if(tablero[f][c]==' '){
             tablero[f][c]=jugador;
